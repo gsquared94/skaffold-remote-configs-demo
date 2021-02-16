@@ -8,7 +8,7 @@ requires:
   - git:
       repo: https://github.com/gsquared94/bank-of-anthos-frontend
       path: ./skaffold.yaml # defaults to `./skaffold.yaml`
-      ref: master # defaults to `master` or `main`
+      ref: main # defaults to `master` or `main`
 
 ---
 
