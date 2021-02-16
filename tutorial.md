@@ -21,7 +21,7 @@ It consists of multiple microservices with each service code living in its own G
 ### What you'll learn
 
 - how to build and deploy a multi-repository application using `skaffold`
-- how to iterate on individual services or groups of services.
+- how to build and deploy individual services or groups of services.
 
 ___
 
@@ -69,14 +69,13 @@ Launching `skaffold` with this file will clone all the specified projects into s
 
 Run:
 ```bash
-skaffold dev --port-forward --tail=false
+skaffold run --port-forward
 ```
 
 Once all images are built (might take a while the first time) and deployed (check for streaming log message `"Deployments stabilized in x.xx seconds"`) click on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> icon and select `Change Port` and change the preview port to `4503`. This should redirect to the frontend service and show the running application.
 
 <walkthrough-footnote>
     `--port-forward` flag forwards local ports to all service ports.
-    `--tail=false` supresses streaming container logs
 </walkthrough-footnote>
 
 ## Develop only selected services
@@ -87,7 +86,7 @@ To only run the `frontend` and `backend` modules without the artificial load gen
 
 Run:
 ```bash
-skaffold dev -m frontend-svc --port-forward --tail=false
+skaffold run -m frontend-svc --port-forward
 ```
 
 Images should already be available in the `skaffold` cache. Once deployed click on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> icon and click `Preview on port 4503`. This should redirect to the frontend service and show the running application as before.
@@ -102,4 +101,4 @@ Images should already be available in the `skaffold` cache. Once deployed click 
 
 All done!
 
-You now know how to use _remote config dependencies_ in Skaffold to develop multi-repository applications.
+You now know how to use _remote config dependencies_ in Skaffold to build and deploy multi-repository applications.
