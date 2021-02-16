@@ -1,0 +1,40 @@
+apiVersion: skaffold/v2beta12
+kind: Config
+metadata:
+  name: frontend-svc
+build:
+requires:
+  - configs: [backend-svc]
+  - git:
+      repo: https://github.com/gsquared94/bank-of-anthos-frontend
+      path: ./skaffold.yaml # defaults to `./skaffold.yaml`
+      ref: master # defaults to `master` or `main`
+
+---
+
+apiVersion: skaffold/v2beta12
+kind: Config
+metadata:
+  name: loadgenerator-svc
+requires:
+  - configs: [backend-svc]
+  - git:
+      repo: https://github.com/gsquared94/bank-of-anthos-loadgenerator
+      # uses default `path` and `ref`
+---
+
+apiVersion: skaffold/v2beta12
+kind: Config
+metadata:
+  name: backend-svc
+requires:
+  - git:
+      repo: https://github.com/gsquared94/bank-of-anthos-userservice
+  - git:
+      repo: https://github.com/gsquared94/bank-of-anthos-contacts
+  - git:
+      repo: https://github.com/gsquared94/bank-of-anthos-ledgerwriter
+  - git:
+      repo: https://github.com/gsquared94/bank-of-anthos-balancereader
+  - git:
+      repo: https://github.com/gsquared94/bank-of-anthos-transactionhistory
