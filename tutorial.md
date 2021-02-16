@@ -60,10 +60,10 @@ minikube start
 
 ## Build and deploy all services
 
-The root <walkthrough-editor-open-file filePath="skaffold.yaml">skaffold.yaml</walkthrough-editor-open-file> file lists all the services as `git` dependencies using the `requires` stanza. They are composed into three `config`s (compare with the <walkthrough-editor-open-file filePath="architecture.png">architecture diagram</walkthrough-editor-open-file>):
+The root <walkthrough-editor-open-file filePath="skaffold.yaml">skaffold.yaml</walkthrough-editor-open-file> file lists all the services as `git` dependencies using the `requires` stanza. They are composed into three `modules` (compare with the <walkthrough-editor-open-file filePath="architecture.png">architecture diagram</walkthrough-editor-open-file>):
 - <walkthrough-editor-select-line filePath="skaffold.yaml" startLine="3" startCharacterOffset="7" endLine="4" endCharacterOffset="0">frontend-svc</walkthrough-editor-select-line> adds the `frontend` service.
-- <walkthrough-editor-select-line filePath="skaffold.yaml" startLine="15" startCharacterOffset="7" endLine="16" endCharacterOffset="0">loadgenerator-svc</walkthrough-editor-select-line> adds the `loadgen` service.
-- <walkthrough-editor-select-line filePath="skaffold.yaml" startLine="26" startCharacterOffset="7" endLine="27" endCharacterOffset="0">backend-svc</walkthrough-editor-select-line> adds all the other services and databases dealing with `accounts` and `transactions`.
+- <walkthrough-editor-select-line filePath="skaffold.yaml" startLine="17" startCharacterOffset="7" endLine="18" endCharacterOffset="0">loadgenerator-svc</walkthrough-editor-select-line> adds the `loadgen` service.
+- <walkthrough-editor-select-line filePath="skaffold.yaml" startLine="28" startCharacterOffset="7" endLine="29" endCharacterOffset="0">backend-svc</walkthrough-editor-select-line> adds all the other services and databases dealing with `accounts` and `transactions`.
 
 Launching `skaffold` with this file will clone all the specified projects into skaffold's cache directory (`~/.skaffold/repos` by default) and import them as skaffold artifacts in a single session. Each service repository defines its own `skaffold.yaml` configuration (eg. [accounts-db/skaffold.yaml](https://github.com/gsquared94/bank-of-anthos-accounts/blob/main/skaffold.yaml)) that instructs `skaffold` how to build and deploy it. 
 
