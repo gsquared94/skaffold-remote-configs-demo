@@ -2,7 +2,7 @@
 
 **Bank of Anthos** is a sample HTTP-based web app that simulates a bank's payment processing network, allowing users to create artificial bank accounts and complete transactions.
 
-This fork modifies the original [Bank of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos) into a multi-repository microservices design to demonstrate how to integrate with `skaffold`'s remote config feature.
+This fork modifies the original [Bank of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos) into a multi-repository microservices design to demonstrate how to integrate with `skaffold`'s [remote config dependency](https://skaffold.dev/docs/design/config/#remote-config-dependency) feature.
 
 ## Service Architecture
 
@@ -30,14 +30,7 @@ Alternately,
 
 1. **Setup a Kubernetes cluster of choice ([GKE](https://cloud.google.com/kubernetes-engine), [minikube](https://minikube.sigs.k8s.io/docs/start/), [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation), etc.)** 
 
-2. **Clone this repository.**
-
-```
-git clone https://github.com/gsquared94/skaffold-remote-configs-demo.git
-cd skaffold-remote-configs-demo
-```
-
-3. **Install skaffold [v1.20.0](https://github.com/GoogleContainerTools/skaffold/releases/tag/v1.20.0) or newer**
+2. **Install skaffold [v1.20.0](https://github.com/GoogleContainerTools/skaffold/releases/tag/v1.20.0) or newer**
 
 * Linux:
 
@@ -51,14 +44,20 @@ curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/v1.20.0/skaff
 curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/v1.20.0/skaffold-darwin-amd64 && chmod +x skaffold && sudo mv skaffold /usr/local/bin
 ```
 
-4. **Deploy the sample app to the cluster.**
+3. **Build and deploy the app (no need to clone this repo).**
 
 ```
-skaffold run
+skaffold run -f https://raw.githubusercontent.com/gsquared94/skaffold-remote-configs-demo/main/skaffold.yaml --port-forward
+```
+
+4. **Delete the deployment.**
+
+```
+skaffold delete -f https://raw.githubusercontent.com/gsquared94/skaffold-remote-configs-demo/main/skaffold.yaml
 ```
 
 5. **Iterate on only selected modules by passing the `-m` flag.**
 
 ```
-skaffold dev -m frontend-svc --port-forward
+skaffold run -f https://raw.githubusercontent.com/gsquared94/skaffold-remote-configs-demo/main/skaffold.yaml -m frontend-svc --port-forward
 ```
